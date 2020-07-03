@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b40feb74-43d7-4050-a0d2-924b2792e410" name="Default Changelist" comment="" />
+    <list default="true" id="b40feb74-43d7-4050-a0d2-924b2792e410" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/array_mask.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/array_mean.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/array_sobel.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/arrays.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rgb_hsv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rgb_image.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/array_mean.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.ui" beforeDir="false" afterPath="$PROJECT_DIR$/project.ui" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,11 +26,17 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1YYls0p1LEaIfHH9fyP9F8PRB9S" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LabProject" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -102,27 +119,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="contour" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Fire Forest Project" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Alik\AppData\Local\Programs\Python\Python37\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/contour.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Fire Forest Project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -165,7 +161,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="speed_estimation_dl" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="rgb_hsv" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Fire Forest Project" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -174,10 +170,31 @@
       </envs>
       <option name="SDK_HOME" value="C:\Users\Alik\AppData\Local\Programs\Python\Python37\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/Downloads/Compressed/opencv-speed-detector/speed_estimation_dl.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/rgb_hsv.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="toexcel" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Fire Forest Project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Alik\AppData\Local\Programs\Python\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/toexcel.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -190,17 +207,17 @@
       <item itemvalue="Python.main" />
       <item itemvalue="Python.coba" />
       <item itemvalue="Python.coba2" />
-      <item itemvalue="Python.contour" />
       <item itemvalue="Python.main (1)" />
-      <item itemvalue="Python.speed_estimation_dl" />
+      <item itemvalue="Python.toexcel" />
+      <item itemvalue="Python.rgb_hsv" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.rgb_hsv" />
+        <item itemvalue="Python.toexcel" />
         <item itemvalue="Python.coba" />
         <item itemvalue="Python.coba2" />
         <item itemvalue="Python.main (1)" />
-        <item itemvalue="Python.speed_estimation_dl" />
-        <item itemvalue="Python.contour" />
       </list>
     </recent_temporary>
   </component>
@@ -216,5 +233,21 @@
       <updated>1583127611648</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

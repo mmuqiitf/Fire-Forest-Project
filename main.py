@@ -4,6 +4,8 @@ import numpy as np
 import math
 import xlsxwriter
 from konvolusi import convolve as conv
+from itertools import product
+import csv
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtGui import QImage, QPixmap
@@ -18,17 +20,16 @@ class ShowImage(QMainWindow):
         super(ShowImage, self).__init__()
         loadUi('project.ui', self)
         self.image = None
+        self.image_contrast = None
         self.btnLoad.clicked.connect(self.loadClicked)
         self.btnSave.clicked.connect(self.saveClicked)
         self.btnIdentifikasi.clicked.connect(self.detectProcess)
-        self.actionGrayscale.triggered.connect(self.grayClicked)
-        self.btnXls.clicked.connect(self.exportXLSX)
         self.actionContrast.triggered.connect(self.contrastClicked)
         self.actionMean_Filter.triggered.connect(self.meanClicked)
 
     @pyqtSlot()
     def loadClicked(self):
-        flname, filter = QFileDialog.getOpenFileName(self, 'Open File', 'E:\\Muqiit\\Kuliah\\PCD\\Project', "Image Files (*.png *.jpg *.jpeg)")
+        flname, filter = QFileDialog.getOpenFileName(self, 'Open File', 'E:\\Muqiit\\Kuliah\\PCD\\Fire Forest Project\\datasets', "Image Files (*.png *.jpg *.jpeg)")
         if flname:
             self.loadImage(flname)
         else:
@@ -37,6 +38,7 @@ class ShowImage(QMainWindow):
     def loadImage(self, flname):
         self.image = cv2.imread(flname, cv2.IMREAD_COLOR)
         img = self.image
+        # self.exportCSV(img, 'array_image')
         self.displayImage()
 
     def grayClicked(self):
@@ -70,41 +72,54 @@ class ShowImage(QMainWindow):
         self.image = img
         self.displayImage(2)
 
+    def contrast(self, img):
+        contrast = 1.4
+        h, w = img.shape[:2]
+        for i in np.arange(h):
+            for j in np.arange(w):
+                a = img.item(i, j)
+                b = math.ceil(a * contrast)
+                if b > 255:
+                    b = 255
+                elif b < 0:
+                    b = 0
+                else:
+                    b = b
+                img.itemset((i, j), b)
+        self.image_contrast = img
+
     def meanClicked(self):
         img = self.image
-        mean = cv2.blur(img, (5, 5))
+        kernel = np.ones((3, 3), np.float32) / 9
+        mean = cv2.filter2D(self.image, -1, kernel)
+        self.image = mean
         cv2.imshow("Mean", mean)
-
-    def mean(self):
-        cv2.mean(self.image)
+        cv2.imshow("Original Image", img)
 
     def detectProcess(self):
+        # Hasil mean filtering
         img = self.image
         # variabel untuk sobel
         scale = 1
         delta = 0
         ddepth = cv2.CV_16S
-        # Blur menggunakan mean filter
-        blur = cv2.blur(img, (5, 5))
         # Ubah mode ke HSV
-        hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        print("HSV :")
+        print(hsv)
         # Ambang batas untuk warna Red
         lower = np.array([5, 5, 111])
         upper = np.array([90, 255, 255])
         # Mencari pixel diantara ambang batas
         mask = cv2.inRange(hsv, lower, upper)
+        # self.exportXLSX(mask, 'array_mask')
         output = cv2.bitwise_and(img, hsv, mask=mask)
         # Ubah mode ke greyscale
-        output_for_sobel = cv2.cvtColor(output, cv2.COLOR_BGR2GRAY)
+        grayscale = cv2.cvtColor(output, cv2.COLOR_BGR2GRAY)
+        # Contrast
+        self.contrast(grayscale)
         # Sobel Edge Detection
-        grad_x = cv2.Sobel(output_for_sobel, ddepth, 1, 0, ksize=3, scale=scale, delta=delta,
-                           borderType=cv2.BORDER_DEFAULT)
-        grad_y = cv2.Sobel(output_for_sobel, ddepth, 0, 1, ksize=3, scale=scale, delta=delta,
-                           borderType=cv2.BORDER_DEFAULT)
-        abs_grad_x = cv2.convertScaleAbs(grad_x)
-        abs_grad_y = cv2.convertScaleAbs(grad_y)
-        grad = cv2.addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0)
-        # Menghitung node red
+        self.sobelDetection(self.image_contrast)
         no_red = cv2.countNonZero(mask)
         print('Node Red : ' + str(no_red))
         # font
@@ -121,23 +136,40 @@ class ShowImage(QMainWindow):
             print('Non Fire')
             cv2.putText(output, "Non Fire", org, font, fontScale, color, thickness, cv2.LINE_AA)
 
-        # cv2.imshow("Output", output)
-        # cv2.imshow("Original Imahe", img)
-        cv2.imshow("Sobel Edge Detection", output_for_sobel)
         self.image = output
         self.displayImage(2)
-        self.image = grad
-        self.displayImage(3)
         cv2.waitKey(0)
 
-    def exportXLSX(self):
-        workbook = xlsxwriter.Workbook('arrays.xlsx')
+    def sobelDetection(self, img):
+        print(img)
+        Sx = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
+        Sy = np.array([[-1, -2, -1], [0, 0, 0], [1, 2, 1]])
+        img_x = conv(img, Sx)
+        img_y = conv(img, Sy)
+        img_out = np.sqrt(img_x * img_x + img_y * img_y)
+        img_out = np.ceil((img_out / np.max(img_out)) * 255)
+        # self.exportXLSX(img_out, 'array_sobel')
+        plt.imshow(img_out, cmap="gray", interpolation="bicubic")
+        plt.xticks([]), plt.yticks([])
+        plt.show()
+
+    def exportXLSX(self, array, flname):
+        workbook = xlsxwriter.Workbook(str(flname) + '.xlsx')
         worksheet = workbook.add_worksheet()
-        array = self.image
+        # array = self.image
         row = 0
         for col, data in enumerate(array):
             worksheet.write_column(row, col, data)
         workbook.close()
+
+    def exportCSV(self, array, flname):
+        with open(str(flname) + '.csv', 'w', newline='') as f_output:
+            csv_output = csv.writer(f_output)
+            csv_output.writerow(["Image Name ", "R", "G", "B"])
+            width, height = array.shape[:2]
+            print(f'{array}, Width {width}, Height {height}')  # show
+            # Read the details of each pixel and write them to the file
+            csv_output.writerows([array, array[x, y]] for x, y in product(range(width), range(height)))
 
     def saveClicked(self):
         flname, filter = QFileDialog.getSaveFileName(self, 'Save File', 'C:\\',
