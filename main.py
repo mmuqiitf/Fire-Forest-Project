@@ -41,37 +41,6 @@ class ShowImage(QMainWindow):
         # self.exportCSV(img, 'array_image')
         self.displayImage()
 
-    def grayClicked(self):
-        h, w = self.image.shape[:2]
-        gray = np.zeros((h, w), np.uint8)
-        for i in range(h):
-            for j in range(w):
-                gray[i, j] = np.clip(
-                    0.299 * self.image[i, j, 0] + 0.587 * self.image[i, j, 1] + 0.114 * self.image[i, j, 2], 0, 255)
-        self.image = gray
-        print(self.image)
-        self.displayImage(2)
-        plt.hist(self.image.ravel(), 255, [0, 255])
-        plt.show()
-
-    def contrastClicked(self):
-        img = self.image
-        contrast = 1.4
-        h, w = img.shape[:2]
-        for i in np.arange(h):
-            for j in np.arange(w):
-                a = img.item(i, j)
-                b = math.ceil(a * contrast)
-                if b > 255:
-                    b = 255
-                elif b < 0:
-                    b = 0
-                else:
-                    b = b
-                img.itemset((i, j), b)
-        self.image = img
-        self.displayImage(2)
-
     def contrast(self, img):
         contrast = 1.4
         h, w = img.shape[:2]
@@ -110,7 +79,7 @@ class ShowImage(QMainWindow):
         # Ambang batas untuk warna Red
         lower = np.array([5, 5, 111])
         upper = np.array([90, 255, 255])
-        # Mencari pixel diantara ambang batas
+        # Thresholding dengan ambang batas
         mask = cv2.inRange(hsv, lower, upper)
         # self.exportXLSX(mask, 'array_mask')
         output = cv2.bitwise_and(img, hsv, mask=mask)

@@ -62,8 +62,8 @@
    <widget class="QPushButton" name="btnSave">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>330</y>
+      <x>550</x>
+      <y>320</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -135,14 +135,14 @@
     <property name="title">
      <string>Menu</string>
     </property>
-    <addaction name="actionGrayscale"/>
-    <addaction name="actionContrast"/>
     <addaction name="actionMean_Filter"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionLoad_Image"/>
+    <addaction name="actionSave_Image"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuOperasi_Titik"/>
@@ -171,6 +171,16 @@
   <action name="actionMean_Filter">
    <property name="text">
     <string>Mean Filtering</string>
+   </property>
+  </action>
+  <action name="actionLoad_Image">
+   <property name="text">
+    <string>Load Image</string>
+   </property>
+  </action>
+  <action name="actionSave_Image">
+   <property name="text">
+    <string>Save Image</string>
    </property>
   </action>
  </widget>
