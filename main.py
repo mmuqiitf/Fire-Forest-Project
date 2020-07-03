@@ -21,10 +21,10 @@ class ShowImage(QMainWindow):
         loadUi('project.ui', self)
         self.image = None
         self.image_contrast = None
+        self.image_output = None
         self.btnLoad.clicked.connect(self.loadClicked)
         self.btnSave.clicked.connect(self.saveClicked)
         self.btnIdentifikasi.clicked.connect(self.detectProcess)
-        self.actionContrast.triggered.connect(self.contrastClicked)
         self.actionMean_Filter.triggered.connect(self.meanClicked)
 
     @pyqtSlot()
@@ -68,10 +68,6 @@ class ShowImage(QMainWindow):
     def detectProcess(self):
         # Hasil mean filtering
         img = self.image
-        # variabel untuk sobel
-        scale = 1
-        delta = 0
-        ddepth = cv2.CV_16S
         # Ubah mode ke HSV
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         print("HSV :")
@@ -83,8 +79,10 @@ class ShowImage(QMainWindow):
         mask = cv2.inRange(hsv, lower, upper)
         # self.exportXLSX(mask, 'array_mask')
         output = cv2.bitwise_and(img, hsv, mask=mask)
+
         # Ubah mode ke greyscale
         grayscale = cv2.cvtColor(output, cv2.COLOR_BGR2GRAY)
+        self.image = output
         # Contrast
         self.contrast(grayscale)
         # Sobel Edge Detection
@@ -105,7 +103,6 @@ class ShowImage(QMainWindow):
             print('Non Fire')
             cv2.putText(output, "Non Fire", org, font, fontScale, color, thickness, cv2.LINE_AA)
 
-        self.image = output
         self.displayImage(2)
         cv2.waitKey(0)
 
@@ -159,7 +156,6 @@ class ShowImage(QMainWindow):
         img = QImage(
             self.image, self.image.shape[1], self.image.shape[0], self.image.strides[0], qformat)
         img = img.rgbSwapped()
-
         if windows == 1:
             self.imgLabel.setPixmap(QPixmap.fromImage(img))
             self.imgLabel.setAlignment(
@@ -170,11 +166,6 @@ class ShowImage(QMainWindow):
             self.hasilLabel.setAlignment(
                 QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
             self.hasilLabel.setScaledContents(True)
-        elif windows == 3:
-            self.tepiHasilLabel.setPixmap(QPixmap.fromImage(img))
-            self.tepiHasilLabel.setAlignment(
-                QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
-            self.tepiHasilLabel.setScaledContents(True)
 
 
 app = QtWidgets.QApplication(sys.argv)

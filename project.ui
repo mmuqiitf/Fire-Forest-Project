@@ -20,7 +20,7 @@
       <x>30</x>
       <y>50</y>
       <width>331</width>
-      <height>241</height>
+      <height>251</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -36,7 +36,7 @@
       <x>420</x>
       <y>50</y>
       <width>331</width>
-      <height>241</height>
+      <height>251</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -63,7 +63,7 @@
     <property name="geometry">
      <rect>
       <x>550</x>
-      <y>320</y>
+      <y>330</y>
       <width>91</width>
       <height>31</height>
      </rect>
