@@ -69,7 +69,7 @@ class ShowImage(QMainWindow):
         img = self.image
         # Ubah mode ke HSV
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        cv2.imshow("HSV", hsb)
+        cv2.imshow("HSV", hsv)
         # Ambang batas untuk warna Red
         lower = np.array([15, 31, 111], dtype="uint8")
         upper = np.array([90, 255, 255], dtype="uint8")
