@@ -27,7 +27,7 @@ class ShowImage(QMainWindow):
 
     @pyqtSlot()
     def loadClicked(self):
-        flname, filter = QFileDialog.getOpenFileName(self, 'Open File', 'E:\\Muqiit\\Kuliah\\PCD\\Fire Forest Project\\datasets', "Image Files (*.png *.jpg *.jpeg)")
+        flname, filter = QFileDialog.getOpenFileName(self, 'Open File', 'C:\\', "Image Files (*.png *.jpg *.jpeg)")
         if flname:
             self.loadImage(flname)
         else:
@@ -54,6 +54,7 @@ class ShowImage(QMainWindow):
                     b = b
                 img.itemset((i, j), b)
         self.image_contrast = img
+        cv2.imshow("Contrast", self.image_contrast)
 
     def meanClicked(self):
         img = self.image
@@ -68,27 +69,27 @@ class ShowImage(QMainWindow):
         img = self.image
         # Ubah mode ke HSV
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        cv2.imshow("HSV", hsb)
         # Ambang batas untuk warna Red
         lower = np.array([15, 31, 111], dtype="uint8")
         upper = np.array([90, 255, 255], dtype="uint8")
         # Thresholding dengan ambang batas
         mask = cv2.inRange(hsv, lower, upper)
-        # self.exportXLSX(mask, 'array_mask')
         output = cv2.bitwise_and(img, hsv, mask=mask)
-
         # Ubah mode ke greyscale
         h, w = img.shape[:2]
         gray = np.zeros((h, w), np.uint8)
         for i in range(h):
             for j in range(w):
                 gray[i, j] = np.clip(
-                    0.299 * self.image[i, j, 0]
-                    + 0.587 * self.image[i, j, 1]
-                    + 0.114 * self.image[i, j, 2],
+                    0.299 * output[i, j, 0]
+                    + 0.587 * output[i, j, 1]
+                    + 0.114 * output[i, j, 2],
                     0,
                     255,
                 )
         self.image = output
+        cv2.imshow("Greyscale", gray)
         # Contrast
         self.contrast(gray)
         # Sobel Edge Detection
@@ -101,7 +102,6 @@ class ShowImage(QMainWindow):
         fontScale = 1
         color = (255, 255, 255)
         thickness = 2
-
         if int(no_red) >= 20000:
             print('Fire detected')
             cv2.putText(output, "Fire Detected", org, font, fontScale, color, thickness, cv2.LINE_AA)
@@ -110,7 +110,6 @@ class ShowImage(QMainWindow):
             cv2.putText(output, "Non Fire", org, font, fontScale, color, thickness, cv2.LINE_AA)
 
         self.displayImage(2)
-        cv2.imshow("Greyscale", gray)
         cv2.waitKey(0)
 
     def sobelDetection(self, img):
@@ -121,7 +120,6 @@ class ShowImage(QMainWindow):
         img_y = conv(img, Sy)
         img_out = np.sqrt(img_x * img_x + img_y * img_y)
         img_out = np.ceil((img_out / np.max(img_out)) * 255)
-        # self.exportXLSX(img_out, 'array_sobel')
         plt.imshow(img_out, cmap="gray", interpolation="bicubic")
         plt.xticks([]), plt.yticks([])
         plt.show()
