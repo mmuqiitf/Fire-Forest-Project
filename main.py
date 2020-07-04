@@ -99,7 +99,7 @@ class ShowImage(QMainWindow):
         # font
         font = cv2.FONT_HERSHEY_SIMPLEX
         org = (50, 50)
-        fontScale = 1
+        fontScale = 1.5
         color = (255, 255, 255)
         thickness = 2
         if int(no_red) >= 20000:
