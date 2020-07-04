@@ -110,7 +110,7 @@ class ShowImage(QMainWindow):
             cv2.putText(output, "Non Fire", org, font, fontScale, color, thickness, cv2.LINE_AA)
 
         self.displayImage(2)
-        # cv2.imshow("Greyscale", gray)
+        cv2.imshow("Greyscale", gray)
         cv2.waitKey(0)
 
     def sobelDetection(self, img):
