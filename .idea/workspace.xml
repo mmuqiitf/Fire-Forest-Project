@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b40feb74-43d7-4050-a0d2-924b2792e410" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/datasets/fire-forest-3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datasets/fire-forest-4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datasets/fire-forest-5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datasets/fire-forest-6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datasets/fire-forest-7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datasets/fire-forest-8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datasets/sunset.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datasets/sunset-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datasets/sunset-3.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/fire-forest-3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/fire-forest-3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/fire-forest-4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/fire-forest-4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/fire-forest-5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/fire-forest-5.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/fire-forest-6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/fire-forest-6.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/fire-forest-7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/fire-forest-7.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/fire-forest-8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/fire-forest-8.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/sunset.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/datasets/sunset.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.ui" beforeDir="false" afterPath="$PROJECT_DIR$/project.ui" afterDir="false" />
     </list>
@@ -35,10 +37,13 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LabProject" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/datasets" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Muqiit\Kuliah\PCD\Fire Forest Project\datasets" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Muqiit\Kuliah\PCD\Project\datasets" />
     </key>
@@ -246,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593777623888</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Clean code">
+      <created>1593783894491</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1593783894491</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

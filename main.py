@@ -13,8 +13,6 @@ from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QFileDialog
 from PyQt5.uic import loadUi
 from matplotlib import pyplot as plt
 
-
-
 class ShowImage(QMainWindow):
     def __init__(self):
         super(ShowImage, self).__init__()
@@ -70,21 +68,29 @@ class ShowImage(QMainWindow):
         img = self.image
         # Ubah mode ke HSV
         hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-        print("HSV :")
-        print(hsv)
         # Ambang batas untuk warna Red
-        lower = np.array([5, 5, 111])
-        upper = np.array([90, 255, 255])
+        lower = np.array([15, 31, 111], dtype="uint8")
+        upper = np.array([90, 255, 255], dtype="uint8")
         # Thresholding dengan ambang batas
         mask = cv2.inRange(hsv, lower, upper)
         # self.exportXLSX(mask, 'array_mask')
         output = cv2.bitwise_and(img, hsv, mask=mask)
 
         # Ubah mode ke greyscale
-        grayscale = cv2.cvtColor(output, cv2.COLOR_BGR2GRAY)
+        h, w = img.shape[:2]
+        gray = np.zeros((h, w), np.uint8)
+        for i in range(h):
+            for j in range(w):
+                gray[i, j] = np.clip(
+                    0.299 * self.image[i, j, 0]
+                    + 0.587 * self.image[i, j, 1]
+                    + 0.114 * self.image[i, j, 2],
+                    0,
+                    255,
+                )
         self.image = output
         # Contrast
-        self.contrast(grayscale)
+        self.contrast(gray)
         # Sobel Edge Detection
         self.sobelDetection(self.image_contrast)
         no_red = cv2.countNonZero(mask)
@@ -104,6 +110,7 @@ class ShowImage(QMainWindow):
             cv2.putText(output, "Non Fire", org, font, fontScale, color, thickness, cv2.LINE_AA)
 
         self.displayImage(2)
+        # cv2.imshow("Greyscale", gray)
         cv2.waitKey(0)
 
     def sobelDetection(self, img):
@@ -147,7 +154,7 @@ class ShowImage(QMainWindow):
 
     def displayImage(self, windows=1):
         qformat = QImage.Format_Indexed8
-        if len(self.image.shape) == 3:  # row[0],col[1],channel[2]
+        if len(self.image.shape) == 3:
             if (self.image.shape[2]) == 4:
                 qformat = QImage.Format_RGBA8888
             else:
